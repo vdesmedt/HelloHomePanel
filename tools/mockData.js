@@ -84,10 +84,49 @@ const newCourse = {
   category: ""
 };
 
+const zones = [
+  {
+    id: 1,
+    name: "firstFloor",
+    parentZoneId: null
+  },
+  {
+    id: 2,
+    name: "bureau",
+    parentZoneId: 1
+  },
+  {
+    id: 3,
+    name: "salon",
+    parentZoneId: 1
+  },
+  {
+    id: 4,
+    name: "cuisine",
+    parentZoneId: null
+  },
+  {
+    id: 5,
+    name: "salle à manger",
+    parentZoneId: null
+  },
+  {
+    id: 6,
+    name: "grenier",
+    parentZoneId: null
+  },
+  {
+    id: 7,
+    name: "cave",
+    parentZoneId: null
+  }
+];
+
 const nodes = [
   {
     id: 1,
     name: "Compteurs grenier",
+    zoneId: 6,
     signature: 3417448591193826519,
     rfAddress: 45,
     nodeType: 1,
@@ -98,6 +137,7 @@ const nodes = [
   {
     id: 2,
     name: "Compteurs cave",
+    zoneId: 7,
     signature: 3217573784642675671,
     rfAddress: 54,
     nodeType: 1,
@@ -106,6 +146,8 @@ const nodes = [
     config: { extraFeatures: 1, nodeInfoFreq: 20, envFreq: 10 }
   }
 ];
+
+const ports = [];
 
 const envHistory = {
   nodeId: 1,
@@ -135,9 +177,11 @@ const envHistory = {
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
+  zones,
   newCourse,
   courses,
   authors,
   nodes,
+  ports,
   envHistory
 };

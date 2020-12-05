@@ -1,11 +1,11 @@
 import React from "react";
 import AboutPage from "./AboutPage";
 import HomePage from "./HomePage";
-import Header from "./Common/Header";
-import NodesPage from "./NodesPage";
+import Header from "./common/Header";
+import NodesPage from "./node/NodesPage";
 import { Route, Switch, Redirect } from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
-import ManageNodePage from "./ManageNodePage";
+import ManageNodePage from "./node/ManageNodePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

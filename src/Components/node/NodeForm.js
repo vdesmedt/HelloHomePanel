@@ -1,5 +1,5 @@
 import React from "react";
-import TextInput from "./Common/TextInput";
+import TextInput from "../common/TextInput";
 import PropTypes from "prop-types";
 
 function NodeForm(props) {

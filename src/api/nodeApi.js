@@ -33,3 +33,9 @@ export function saveNode(node) {
     .then(handleResponse)
     .catch(handleError);
 }
+
+export function deleteNode(id) {
+  return fetch(baseUrl + id, { method: "DELETE" })
+    .then(handleResponse)
+    .catch(handleError);
+}

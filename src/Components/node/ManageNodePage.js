@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import NodeForm from "./NodeForm";
-import * as nodeApi from "../api/nodeApi";
+import nodeStore from "./../../stores/nodeStore";
+import * as nodeActions from "./../../actions/nodeActions";
+
 import { toast } from "react-toastify";
 
 function ManageNodePage(props) {
   const [errors, setErrors] = useState({});
+  const [nodes, setNodes] = useState(nodeStore.getNodes());
   const [node, setNode] = useState({
     id: null,
     name: "",
@@ -13,11 +16,19 @@ function ManageNodePage(props) {
   });
 
   useEffect(() => {
-    const id = props.match.params.id;
-    if (id) {
-      nodeApi.getNodeById(id).then(_node => setNode(_node));
+    nodeStore.addChangeListener(onChange);
+    const id = parseInt(props.match.params.id);
+    if (nodes.length === 0) {
+      nodeActions.loadNodes();
+    } else if (id) {
+      setNode(nodeStore.getNodeById(id));
     }
-  }, [props.match.params.id]);
+    return () => nodeStore.removeChangeListener(onChange);
+  }, [nodes.length, props.match.params.id]);
+
+  function onChange() {
+    setNodes(nodeStore.getNodes());
+  }
 
   function handleChange({ target }) {
     setNode({ ...node, [target.name]: target.value });
@@ -26,7 +37,7 @@ function ManageNodePage(props) {
   function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
-    nodeApi.saveNode(node).then(() => {
+    nodeActions.saveNode(node).then(() => {
       props.history.push("/nodes");
       toast.success("Node saved");
     });

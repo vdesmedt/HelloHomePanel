@@ -10,6 +10,7 @@ function NodesList(props) {
           <th>Name</th>
           <th>Signature</th>
           <th>RfAddress</th>
+          <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +22,14 @@ function NodesList(props) {
               </td>
               <td>{node.signature}</td>
               <td>{node.rfAddress}</td>
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={() => props.deleteNode(node.id)}
+                >
+                  Delete
+                </button>
+              </td>
             </tr>
           );
         })}
@@ -37,7 +46,8 @@ NodesList.propTypes = {
       signature: PropTypes.number.isRequired,
       rfAddress: PropTypes.number.isRequired
     })
-  ).isRequired
+  ).isRequired,
+  deleteNode: PropTypes.func.isRequired
 };
 
 export default NodesList;
